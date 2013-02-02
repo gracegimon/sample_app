@@ -1,4 +1,4 @@
-<%= @title %> 
+
 <p>
   Ruby on Rails Tutorial is a project
   <a href="http://railstutorial.org/"> Ruby tutorial</a>
