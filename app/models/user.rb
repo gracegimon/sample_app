@@ -13,4 +13,13 @@ class User < ActiveRecord::Base
   attr_accessible :email, :name 
   # Just the attributes that the user
   # can modify
+email_regex= /[\w+\-.]+@[a-z\d.]+\.[a-z]+/i #The i means case insensitive
+#Validation for the presence of :name
+validates :name, :presence => true,
+				 :length => {:maximum => 50}
+validates :email, :presence => true,
+				  :format => {with: email_regex},
+				  :uniqueness => {:case_sensitive => false}
+
+
 end
