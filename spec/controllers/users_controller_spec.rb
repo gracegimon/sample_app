@@ -5,22 +5,28 @@ describe UsersController do
 
   describe "GET 'show'" do
 
-    before(:each) do
-      @user = Factory(:user)
-    end
+  subject { page }
 
-    it "should be successful" do #IT should fail, no users created to show
-                                  # to solve this, using factories
-      get :show, :id => @user.id
-      response.should be_success
-    end
+  describe "profile page" do
+    let(:user) { FactoryGirl.create(:user) }
+    before { visit user_path(user) }
 
-    it "should find the right user" do
-      # Assigns reaches the user_controller
-      # uses the instance variable there
-      get :show, :id => @user
-      assigns(:user).should == @user
-    end
+    it "should show the name" do
+     should have_selector('h1',    text: user.name) 
+   end
+
+    it "should have the right title" do
+     should have_selector('title', text: user.name)
+   end
+
+   it "should have the right URL" do
+   #Because we're using Capybara
+   should have_link(user_path(user), href: user_path(user))
+
+   end
+  end
+    
+
   end
   describe "GET 'new'" do
     it "returns http success" do

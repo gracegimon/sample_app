@@ -1,9 +1,10 @@
-Factory.define :user do |user| #This allows to have an user created
+	 #This allows to have an user created
 								# in the test environment
-	user.name                  "Michael Hartl"
-	user.email                 "mhartl@example.com"
-	user.password              "foobar"
-	user.password_confirmation "foobar"
-
-
+FactoryGirl.define do
+  factory :user do
+    name     "Michael Hartl"
+    email    "michael@example.com"
+    password "foobar"
+    password_confirmation "foobar"
+  end
 end
