@@ -155,3 +155,7 @@ aside {
   float: left;
   margin-right: 10px;
 }
+
+div.field, div.actions {
+	margin-bottom: 10px;
+}
