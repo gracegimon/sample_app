@@ -1,7 +1,12 @@
 <h1><%= @title %></h1>
-<p></p>
+
+
 <%= form_for(@user) do |f| %>  <!-- We have to make sure @user is not nil -->
 <!-- The form makes the post and relates to action ="/users" -->
+ 
+ <!-- render a partial -->
+ <%= render 'shared/error_messages' %>
+
 	<div class = "field"> 
 		<%= f.label :name %> <br />
 		<%= f.text_field :name %>

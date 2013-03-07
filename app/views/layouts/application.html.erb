@@ -10,6 +10,11 @@
 	<div class="container">
 		<%= render 'layouts/header' %>
   		<section class="round">
+  			<% flash.each do |key,value| %>
+  			<div class= "flash <%=key%>">
+  				<%=value%>
+  			 </div> 
+  			 <% end %> <!-- allow that depending of the key, there's a different layout -->
 		 <%=yield %>
 		 </section>
 		 <%=render 'layouts/footer' %>
