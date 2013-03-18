@@ -15,6 +15,7 @@ class UsersController < ApplicationController
 #   raise params[:user].inspect #This show a string rep of the obj
   	@user = User.new(params[:user])
     if @user.save
+      sign_in @user
       flash[:success] = "Welcome to the Sample App!"
       redirect_to @user # Equivalent to user_path(@user)
     else

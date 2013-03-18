@@ -44,6 +44,38 @@ describe "LayoutLinks" do
 		page.should have_selector('title', :content => "Sign up")
 		page.should have_selector('a[href="/"]>img') #We want to check
 													 #the link of the logo
+	end
+
+	describe "when not signed in" do
+		it "should have a signin link" do
+			visit root_path
+			page.should have_selector("a", :href =>signin_path,
+				:content => "Sign in")
+		end
 
 	end
+	describe "when signed in" do
+		before(:each) do
+			visit signin_path
+			@user = FactoryGirl.create(:user)
+			fill_in :email, :with => @user.email
+			fill_in :password, :with =>@user.password
+			click_button "Sign in"
+		end
+
+		it "should have a signout link" do
+			visit root_path
+			page.should have_selector("a",:href =>signout_path,
+				:content => "Sign out")
+		end
+
+		it "should have a profile link " do
+			visit root_path
+			page.should have_selector("a", :href => user_path(@user),
+										:content => "Profile")
+		end
+
+
+	end
+
 end

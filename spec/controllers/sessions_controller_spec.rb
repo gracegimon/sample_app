@@ -65,4 +65,25 @@ describe SessionsController do
 
 	end
 
+	describe "DELETE 'destroy'" do
+		before (:each) do
+			@user = FactoryGirl.create(:user)
+			@attr = {:email => @user.email, :password => @user.password}
+		end
+
+		it "should sign a user out" do
+			test_sign_in(@user)
+			delete :destroy
+			controller.should_not be_signed_in
+		end
+
+		it "should redirect to home" do
+			post :destroy, :session =>@attr
+			response.should redirect_to(root_path)
+
+		end
+
+
+	end
+
 end
