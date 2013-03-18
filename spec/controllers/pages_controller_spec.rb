@@ -29,7 +29,7 @@ describe PagesController do
       response.should be_success
     end
     it "should have the right title" do
- 	visit contact_path
+      	visit contact_path
         page.should have_selector('title',
                     :text => "#{@base_title} | Contact")
      end
