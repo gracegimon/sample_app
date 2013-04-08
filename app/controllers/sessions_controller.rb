@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
   	 	render 'new' # In case of a fail submit, re-render the sign in page
   	else
   		sign_in user # click the button and do this function
-  		redirect_to user
+  		redirect_back_or user
   	end
   end
 
