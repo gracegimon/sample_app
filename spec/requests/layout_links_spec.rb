@@ -30,6 +30,12 @@ describe "LayoutLinks" do
 		visit signin_path
 		page.should have_selector('title', :content => "Sign in")
 	end
+	
+	it "should have a settings link" do
+	  visit root_path
+	  page.should have_selector('title', :content =>"Settings")
+	  
+  end
 
 	it "should have the right links on the layout" do
 		visit root_path

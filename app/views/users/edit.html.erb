@@ -1,0 +1,16 @@
+<h1><%= @title %></h1>
+
+
+<%= form_for(@user) do |f| %>  <!-- We have to make sure @user is not nil -->
+<!-- The form makes the post and relates to action ="/users" -->
+ 
+	<%= render 'shared/fields', :f => f %> 
+	<div class = "actions"> 
+		<%= f.submit "Update" %> <br />
+	</div>
+	
+	<div>
+		<%= gravatar_for @user %>
+		<a href="http://gravatar.com/emails"> change </a>
+	</div>
+<% end %>
