@@ -86,6 +86,7 @@ describe UsersController do
   describe "GET 'edit'" do
    before(:each) do
     @user = FactoryGirl.create(:user)
+    test_sign_in(@user)
    end
     
     it "should be succesful" do
@@ -93,10 +94,11 @@ describe UsersController do
       response.should be_success
     end
     
-   it "should have the right title" do
-      visit edit_user_path(@user)
-      page.should have_content("Edit")
-    end
+ #  it "should have the right title" do
+  #    get :edit, :id => @user
+  #    response.should have_content("Edit")
+  #  end
+    
   it "should have a link to change the Gravatar" do
      visit edit_user_path(@user)
      page.should have_selector('a', :href => 'http://gravatar.com/emails',
@@ -104,6 +106,8 @@ describe UsersController do
   end
       
   end
+  
+
   
   describe "PUT 'update'" do
     
@@ -152,6 +156,28 @@ describe UsersController do
       
     end
     
+  end
+  
+  describe "authentication of edit/update actions" do
+    
+    before(:each) do
+     @user = FactoryGirl.create(:user)
+    end
+    
+    it "should deny access to 'edit'" do
+         get :edit, :id => @user
+          response.should redirect_to(signin_path)
+          flash[:notice].should =~ /sign in/i
+    end
+    
+    it "should deny access to 'update'" do
+     put :update, :id => @user, :user => []
+     response.should redirect_to(signin_path)
+     
+    end
+    
+    
     
   end
+  
 end
