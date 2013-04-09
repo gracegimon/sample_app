@@ -31,7 +31,7 @@ describe "Users" do
               click_button "Sign up"
               page.should have_selector('div.flash.success', 
                           :content => "Welcome")
-              current_path.should == "/users/1" #Inside integration test, user render
+              current_path.match(/\/users\/\d+/) #Inside integration test, user render
             end.should change(User, :count).by(1)
         end
 
