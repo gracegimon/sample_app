@@ -35,7 +35,8 @@ describe UsersController do
     end
     
     describe "pagination" do
-      before(:all) { 30.times { FactoryGirl.create(:user) } }
+      before(:all) { 30.times { FactoryGirl.create(:user) }
+     }
            after(:all)  { User.delete_all }
 
            it "should list each user" do
@@ -44,6 +45,37 @@ describe UsersController do
                page.should have_selector('li', text: user.name)
              end
            end
+                  it "should be able to delete another user" do
+                     @user = test_sign_in(FactoryGirl.create(:user)) 
+                     @user.toggle!(:admin)
+                     other_user = User.all.second
+                     get :index
+                     response.should have_selector('a', :href => user_path(other_user),
+                                                     :content => "delete")
+                   end
+           
+      end
+      
+    describe "delete links" do
+       before(:each) do
+           @user = test_sign_in(FactoryGirl.create(:user))
+        end
+
+       it "should be able to delete another user" do
+          @user.toggle!(:admin)
+          other_user = User.all.second
+          get :index
+          response.should have_selector('a', :href => user_path(other_user),
+                                          :content => "delete")
+        end
+        
+        it "should not have delete links for non-admins" do
+          other_user = User.all.second
+          get :index
+          response.should_not have_selector('a', :href => user_path(other_user),
+                                      :content => "delete")
+        end
+
       end
    
    
@@ -252,5 +284,14 @@ describe UsersController do
     
     
   end
+  
+   # describe "DELETE 'destroy" do
+   #   
+   #   before(:each) do
+   #     @user = FactoryGirl.create(:user)
+   #   end
+   #   
+   #   
+   # end
   
 end

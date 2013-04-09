@@ -1,8 +1,11 @@
 <h1> All Users </h1>
 
-<%= will_paginate %>
+ <%= will_paginate %>
 <ul class="users">
-	<% render @users%> <!-- Equivalent to @users.each then render 'user', user -->
+
+	<% @users.each do |user|%>
+	<%= render 'user', :user => user%> <!-- Equivalent to @users.each then render 'user', user -->
+	<% end %>
 </ul>
 
-<%=will_paginate %>
+<%= will_paginate %>
