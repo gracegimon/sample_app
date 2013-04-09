@@ -4,6 +4,7 @@ gem 'rails', '3.2.11'
 gem 'gravatar_image_tag', '0.1.0'
 
 gem 'multi_json', '1.5.0'
+# gem 'bootstrap-sass', '2.1'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

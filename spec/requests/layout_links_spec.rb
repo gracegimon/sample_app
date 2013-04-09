@@ -36,6 +36,12 @@ describe "LayoutLinks" do
 	  page.should have_selector('title', :content =>"Settings")
 	  
   end
+  
+  it "should have a Users link" do
+	  visit root_path
+	  page.should have_selector('title', :content =>"Users")
+	  
+  end
 
 	it "should have the right links on the layout" do
 		visit root_path
