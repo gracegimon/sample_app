@@ -27,12 +27,24 @@ describe UsersController do
       
       it "should have an element for each user" do
         get :index
-        User.all.each do |user|
-          response.should have_selector('li', text: user.name)     
-        end
+        User.paginate(page: 1).each do |user|
+           response.should have_selector('li', text: user.name)
+         end
        end
 
     end
+    
+    describe "pagination" do
+      before(:all) { 30.times { FactoryGirl.create(:user) } }
+           after(:all)  { User.delete_all }
+
+           it "should list each user" do
+             get :index
+             User.paginate(page: 1).each do |user|
+               page.should have_selector('li', text: user.name)
+             end
+           end
+      end
    
    
  end
