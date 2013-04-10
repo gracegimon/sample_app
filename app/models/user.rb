@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
   attr_accessor :password # Just get and set (user model objects)
   attr_accessible :email, :name, :password, :password_confirmation
   # Just the attributes that the real user can modify
+
+  has_many :microposts, :dependent => :destroy
 email_regex= /[\w+\-.]+@[a-z\d.]+\.[a-z]+/i #The i means case insensitive
 #Validation for the presence of :name
 validates :name, :presence => true,
