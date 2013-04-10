@@ -9,11 +9,17 @@
     </section>
   </aside>
 </div>
-
+  <% if @user.microposts.any? %>
+  <table class="microposts", summary ="User microposts">
+    <%= render @microposts %>
+  </table>
+  <% end %>
+   <%= will_paginate @microposts %>
 <tr>
 <td class="sidebar round">
 	<strong>Name</strong> <%= @user.name %> <br />
 	<strong> URL </strong> <%= link_to user_path(@user), @user %>
+  <strong> Microposts </strong> <%= @user.microposts.count %>
 </td>
 </tr>
 
