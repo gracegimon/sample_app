@@ -7,20 +7,25 @@ describe PagesController do
     @base_title = "Ruby on Rails Tutorial Sample App"
   end
   describe "GET 'home'" do
-    it "returns http success" do
-      visit root_path
-      response.should be_success
+
+    describe "when not signed in" do
+      it "returns http success" do
+        visit root_path
+        response.should be_success
+      end
+
+      it "should have this content" do
+        visit  root_path
+        page.should have_content("#{@base_title} | Home")
+      end
+
+      it "should have a non-blank body" do
+        visit root_path
+        response.body.should_not =~ /<body>\s*<\/body>/
+      end
+
     end
 
-    it "should have this content" do
-      visit  root_path
-      page.should have_content("#{@base_title} | Home")
-    end
-
-     it "should have a non-blank body" do
-      visit root_path
-      response.body.should_not =~ /<body>\s*<\/body>/
-     end
   end
 
   describe "GET 'contact'" do

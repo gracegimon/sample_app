@@ -18,6 +18,20 @@ class User < ActiveRecord::Base
   # Just the attributes that the real user can modify
 
   has_many :microposts, :dependent => :destroy
+  has_many :relationships, :dependent => :destroy,
+  							:foreign_key => "follower_id"
+  has_many :reverse_relationships, :dependent => :destroy,
+  			:foreign_key => "followed_id",
+  			:class_name => "Relationship"
+							
+  has_many :following, :through => :relationships, 
+  			:source => :followed #This is an attribute that gives us all of the people we follow (following)
+  								# extracted from the relationship table at the followed_id column
+# We have to give the source because "followed" can't be pluralized
+  has_many :followers, :through => :reverse_relationships,
+  						:source => :follower
+
+
 email_regex= /[\w+\-.]+@[a-z\d.]+\.[a-z]+/i #The i means case insensitive
 #Validation for the presence of :name
 validates :name, :presence => true,
@@ -39,6 +53,18 @@ end
 
 def feed
 	Micropost.where("user_id = ?", id) #Automatically '?' escapes string.
+end
+
+def following?(followed)
+	relationships.find_by_followed_id(followed)
+end
+
+def follow!(followed)
+	relationships.create!(:followed_id => followed.id)
+end
+
+def unfollow!(followed)
+	relationships.find_by_followed_id(followed).destroy
 end
 
 
