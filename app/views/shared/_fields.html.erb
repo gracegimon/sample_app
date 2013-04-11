@@ -1,5 +1,5 @@
 <!-- render a partial -->
-<%= render 'shared/error_messages' %> <!-- Just for ActiveRecord objects -->
+<%= render 'shared/error_messages', :object => f.object %> <!-- Just for ActiveRecord objects -->
 
 	<div class = "field"> 
 		<%= f.label :name %> <br />

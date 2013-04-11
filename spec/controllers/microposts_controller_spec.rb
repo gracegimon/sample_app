@@ -53,6 +53,12 @@ describe MicropostsController do
 
  		end
 
+ 		it "should redirect to root path" do
+ 			post :create, :micropost => @attr
+ 			response.should redirect_to root_path
+
+ 		end
+
  	end
 
  end
