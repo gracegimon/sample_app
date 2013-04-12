@@ -102,6 +102,8 @@ describe UsersController do
   end
 
 
+  end
+
   describe "GET 'new'" do
     it "returns http success" do
       get 'new'
@@ -112,7 +114,7 @@ describe UsersController do
       page.should have_content("Sign up")
     end 
   end
-  end
+
 
   describe "POST" 'create' do
 
