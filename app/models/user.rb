@@ -46,13 +46,14 @@ validates :password, :presence => true,
 #Callback: A method that's called in a particular life time of the object
 
 before_save :encrypt_password #Before saving the user, encrypt the password
+scope :admin, where(:admin => true)
 
 def has_password?(submitted_password)
 	encrypted_password == encrypt(submitted_password)
 end
 
 def feed
-	Micropost.where("user_id = ?", id) #Automatically '?' escapes string.
+	Micropost.from_users_followed_by(self) #Automatically '?' escapes string.
 end
 
 def following?(followed)

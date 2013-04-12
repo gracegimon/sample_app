@@ -227,6 +227,12 @@ describe "micropost associations" do
       end
      its(:feed) { should_not include(unfollowed_post) }
 
+     it "should include the microposts of followed users" do
+      followed = FactoryGirl.create(:user)
+      mp3 = FactoryGirl.create(:micropost, :user => followed)
+      @user.follow!(followed)
+      @user.feed.should include(mp3)
+     end
   end
 
 end
