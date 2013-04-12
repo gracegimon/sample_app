@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.11'
 gem 'gravatar_image_tag', '0.1.0'
 gem 'will_paginate', '3.0.3'
-gem 'multi_json', '1.5.0'
+# gem 'multi_json', '1.5.0'
 gem 'better_errors'
 gem 'pry'
 gem 'binding_of_caller'
@@ -32,9 +32,9 @@ group :test do
   gem 'capybara', '1.1.2'
   gem 'guard-spork', '1.2.0'
   gem 'spork', '0.9.2'
- # gem 'rb-inotify', '0.8.8'
- # gem 'libnotify', '0.5.9'
-  gem 'rb-fsevent', '0.9.1', :require => false
+  gem 'rb-inotify', '0.9'
+  gem 'libnotify', '0.5.9'
+ # gem 'rb-fsevent', '0.9.1', :require => false
   gem 'factory_girl_rails', '4.1.0'
 end 
 
